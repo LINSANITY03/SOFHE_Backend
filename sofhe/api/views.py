@@ -17,10 +17,8 @@ class TaskView(APIView):
         data = request.data
         user_data = User.objects.filter(id=data['_user']).last()
         if user_data:
-            print(data)
-            print(data['_datetime'])
             Event.objects.create(
-                user=user_data, title=data['_title'], description=data['_description'], credit=data['_income'], task_datetime=data['_datetime'], status=data['_status'])
+                user=user_data, title=data['_title'], description=data['_description'], credit=data['_income'], task_datetime=data['_datetime'], status=int(data['_status']))
             return Response({'data': 1}, status=status.HTTP_201_CREATED)
         else:
             return Response({'data': 0}, status=status.HTTP_404_NOT_FOUND)
