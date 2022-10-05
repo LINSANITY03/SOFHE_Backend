@@ -12,16 +12,15 @@ from .serializers import EventSerializer
 
 
 # @permission_classes([IsAuthenticated])
-class TaskView(APIView):
-    def post(self, request, format=None):
-        data = request.data
-        user_data = User.objects.filter(id=data['_user']).last()
-        if user_data:
-            Event.objects.create(
-                user=user_data, title=data['_title'], description=data['_description'], credit=data['_income'], task_datetime=data['_datetime'], status=int(data['_status']))
-            return Response({'data': 1}, status=status.HTTP_201_CREATED)
-        else:
-            return Response({'data': 0}, status=status.HTTP_404_NOT_FOUND)
+def addUserTask(request, pk):
+    current_user = User.objects.filter(id=pk).last()
+    data = request.data
+    if current_user:
+        Event.objects.create(
+            user=current_user, title=data['_title'], description=data['_description'], credit=data['_income'], task_datetime=data['_datetime'], status=int(data['_status']))
+        return Response({'data': 1}, status=status.HTTP_201_CREATED)
+    else:
+        return Response({'data': 0}, status=status.HTTP_404_NOT_FOUND)
 
 
 # @permission_classes([IsAuthenticated])
@@ -32,4 +31,21 @@ def userTask(request, pk):
     serializer = EventSerializer(data_query, many=True)
 
     return Response(serializer.data, status=status.HTTP_200_OK)
-    # return Response({"message": "Hello, world!"})
+
+
+@api_view(['POST'])
+def editUserTask(request, taskId, pk):
+
+    current_user = User.objects.filter(id=pk).last()
+    getevent = Event.objects.get(id=taskId, user=current_user)
+    data = request.data
+    if getevent:
+        getevent.title = data['_title']
+        getevent.description = data['_description']
+        getevent.credit = data['_income']
+        getevent.task_datetime = data['_datetime']
+        getevent.status = int(data['_status'])
+        getevent.save()
+        return Response({'data': 1}, status=status.HTTP_202_ACCEPTED)
+    else:
+        return Response({'data': 0}, status=status.HTTP_404_NOT_FOUND)
