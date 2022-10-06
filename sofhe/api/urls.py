@@ -8,6 +8,8 @@ urlpatterns = [
     path('all-tasks/<int:pk>', views.userTask, name='all_tasks'),
     path('edit-tasks/<int:taskId>/<int:pk>',
          views.editUserTask, name='edit_tasks'),
+    path('delete-tasks/<int:taskId>/<int:pk>',
+         views.deleteTask, name='delete_tasks'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
