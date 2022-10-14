@@ -1,4 +1,5 @@
 
+from tkinter.ttk import Style
 from rest_framework import serializers
 from .models import Event
 

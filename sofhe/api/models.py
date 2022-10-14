@@ -22,6 +22,9 @@ class Event(models.Model):
     updated = models.DateTimeField(auto_now=True)
     status = models.BooleanField(help_text='income:0, expense:1', default=0)
 
-    def __str__(self) -> str:
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
+        self.title = self.title.capitalize()
 
+    def __str__(self) -> str:
         return self.title
