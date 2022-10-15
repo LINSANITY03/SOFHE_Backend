@@ -9,6 +9,7 @@ class EventSerializer(serializers.ModelSerializer):
         source="task_datetime", format="%Y-%m-%d")
     time_only = serializers.DateTimeField(
         source="task_datetime", format="%H:%M")
+    credit = serializers.FloatField()
 
     class Meta:
         model = Event

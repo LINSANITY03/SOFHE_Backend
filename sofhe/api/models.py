@@ -25,6 +25,7 @@ class Event(models.Model):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self.title = self.title.capitalize()
+        self.description = self.description.capitalize()
 
     def __str__(self) -> str:
         return self.title
