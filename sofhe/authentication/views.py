@@ -1,8 +1,9 @@
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
-
+from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework import status
 
 from django.contrib.auth.models import User
 from .serializers import Login
@@ -36,3 +37,13 @@ def total_user(request):
     user_query = User.objects.all()
     serializer = Login(user_query, many=True)
     return Response(serializer.data)
+
+@api_view(['POST'])
+def logout_user(request):
+    data = request.data
+    try:
+        token = RefreshToken(data['token'])
+        token.blacklist() 
+        return Response({'message': 'Logged out'}, status=status.HTTP_200_OK)
+    except TokenError:
+        return Response({'message': 'Bad Token'}, status=status.HTTP_400_BAD_REQUEST)
