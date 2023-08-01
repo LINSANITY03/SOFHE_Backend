@@ -8,20 +8,22 @@ To run the project:
 
 '''
 
-# virutalenv venv
+    virutalenv venv
 
 '''
 
 # 2. Activate the environment
 
-''' # venv\Scripts\Activate
+'''
+venv\Scripts\Activate
+
 '''
 
 # 3. Install all the dependencies
 
 '''
 
-# pip install -r require.txt
+    pip install -r require.txt
 
 '''
 
@@ -29,8 +31,8 @@ To run the project:
 
 '''
 
-# cd sofhe/
+    cd sofhe/
 
-# python manage.py runserver
+    python manage.py runserver
 
 '''
