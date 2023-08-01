@@ -2,11 +2,25 @@
 
 Using Django, django-rest-framework, MYSQL, CELERY
 
-To run the project
-''' 1. Open Terminal
+To run the project:
 
-        cd sofhe/
+# 1. Create a virutal environment
 
-    2. Python manage.py runserver
+''' # virutalenv venv
+'''
+
+# 2. Activate the environment
+
+''' # venv\Scripts\Activate
+'''
+
+# 3. Install all the dependencies
+
+''' # pip install -r require.txt
+'''
+
+# 4. Open Terminal and go to project directory and run the project
+
+''' # cd sofhe/ # python manage.py runserver
 
 '''
