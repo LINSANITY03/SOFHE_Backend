@@ -29,3 +29,9 @@ cd sofhe/
 
 python manage.py runserver
 ```
+
+# 5. Go to web browser and enter following url to view all the available url using SWAGGER-API.
+
+```
+127.0.0.1:8000/schema/docs/
+```
