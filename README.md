@@ -35,3 +35,5 @@ python manage.py runserver
 ```
 127.0.0.1:8000/schema/docs/
 ```
+
+You can see the different api. To test, click on the api and press try it out.
