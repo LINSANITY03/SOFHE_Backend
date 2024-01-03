@@ -40,7 +40,7 @@ class EventTask(ModelViewSet):
         data_query = current_user.event_set.all().order_by('-pk')
         serializer = EventSerializer(data_query, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-    
+
     def update(self, request, pk=None):
         pass
 
@@ -60,15 +60,13 @@ class EventTask(ModelViewSet):
         except:
             return Response({'message': 'Something went wrong'}, status=status.HTTP_404_NOT_FOUND)
 
+    def destroy(self, request, pk=None):
 
-    def destroy(self, request, taskId, pk=None):
+        task_Id = request.query_params.get('taskId')
         current_user = User.objects.filter(pk=pk).last()
         try:
-            getevent = Event.objects.get(pk=taskId, user=current_user)
+            getevent = Event.objects.get(pk=task_Id, user=current_user)
             getevent.delete()
             return Response({'message': 'Event deleted'}, status=status.HTTP_200_OK)
         except:
             return Response({'message': 'Something went wrong'}, status=status.HTTP_404_NOT_FOUND)
-
-
-
